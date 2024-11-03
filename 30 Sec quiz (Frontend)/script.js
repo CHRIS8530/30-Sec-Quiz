@@ -1,3 +1,11 @@
+function restartQuiz() {
+    score = 0;
+    currentQuestion = 0;
+    timeLeft = 30;
+    $("#leaderboard").hide();
+    $("#question-container").show();
+}
+
 $(document).ready(function() {
     var questions = [
         {
@@ -80,7 +88,7 @@ $(document).ready(function() {
 
     function showQuestion() {
         var question = questions[currentQuestion];
-        $("#question-text").text(question.question);
+        $("#question-text").text("Question " + (currentQuestion + 1) + ": " + question.question);
         $("#answer-input").val("");
         $("#submit-answer").removeClass("hidden");
         $("#leaderboard").hide();
@@ -158,3 +166,4 @@ $(document).ready(function() {
 
     startQuiz();
 });
+
