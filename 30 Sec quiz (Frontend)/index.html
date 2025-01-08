@@ -5,18 +5,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="timer">30 seconds</div>
     <div id="question-container">
+        <div id="timer">30</div>
         <h2 id="question-text"></h2>
         <input type="text" id="answer-input" />
         <button id="submit-answer">Submit</button>
+        <div id="leaderboard">
+            <h2>Leaderboard</h2>
+            <ul id="leaderboard-list"></ul>
+        </div>
+            <button id="restart-quiz" class="show">Restart Quiz</button>
+        </div>
     </div>
-    <div id="leaderboard">
-        <h2>Leaderboard</h2>
-        <ul id="leaderboard-list"></ul>
-        <button id="restart-quiz">Restart Quiz</button>
-    </div>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="script.js"></script>
 </body>
