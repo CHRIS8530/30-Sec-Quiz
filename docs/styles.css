@@ -1,107 +1,121 @@
+/* General body styling */
 body {
-    background-image: url("assets/backgrnd_img/ai-generated-9054163.jpg");
-    background-size: cover;
-    background-position: center;
-    font-family: Arial, sans-serif;
+    background-image: url("assets/backgrnd_img/ai-generated-9054163.jpg"); /* Background image for the page */
+    background-size: cover; /* Ensure the background covers the entire viewport */
+    background-position: center; /* Center the background image */
+    font-family: Arial, sans-serif; /* Font for the entire page */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100vh; /* Full viewport height */
+    margin: 0;
+    padding: 0;
 }
 
+/* Question container styling */
 #question-container {
     position: relative;
-    background-image: linear-gradient(135deg, #FFF720 10%, #3CD500 100%);
-    padding-bottom: 20px;
-    border: 3px solid #ddd;
-    border-radius: 15px 15px 15px 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-image: linear-gradient(135deg, #FFF720 10%, #3CD500 100%); /* Gradient background for the container */
+    padding: 20px; /* Padding inside the container */
+    border: 3px solid #ddd; /* Border around the container */
+    border-radius: 15px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 400px;
-    height: 550px;
+    width: 80%; /* Container width set to 80% of the parent */
+    max-width: 350px; /* Maximum width of the container */
+    min-height: 500px; /* Minimum height for the container */
+    height: auto; /* Flexible height based on content */
     justify-content: space-between;
+    margin: 20px; /* Margin around the container */
 }
 
+/* Timer styling */
 #timer {
-    font-size: 120px;
+    font-size: 80px; /* Large font size for visibility */
     font-weight: bold;
-    color: #f0f0f0;
+    color: #f0f0f0; /* Light color for contrast */
     margin-top: 20px;
 }
 
+/* Question text styling */
 #question-text {
-    font-size: 25px;
-    margin: 10px 40px;
-    text-align: center;
-    flex-grow: 1;
+    font-size: 20px; /* Font size for question text */
+    margin: 10px 20px; /* Margin around the text */
+    text-align: center; /* Center-align the text */
+    flex-grow: 1; /* Allow the text area to grow */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* Answer input styling */
 #answer-input {
     margin-top: 10px;
     margin-bottom: 20px;
-    width: 200px;
+    width: 80%; /* Width of the input field */
     height: 30px;
     border-radius: 5px;
     border-style: none;
 }
 
+/* Submit answer button styling */
 #submit-answer {
-    width: 100px;
+    width: 80px;
     height: 25px;
     margin-bottom: 20px;
-    background-color: #4CAF50;
-    color: #fff;
+    background-color: #4CAF50; /* Green background color */
+    color: #fff; /* White text color */
     border: none;
     border-radius: 5px;
 }
 
-#answers {
-    margin-bottom: 20px;
-}
-
+/* Answer button styling */
 .answer-button {
     background-color: #4CAF50;
     color: #fff;
-    padding: 10px 20px;
+    padding: 10px 20px; /* Padding inside the button */
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
+/* Hover effect for answer button */
 .answer-button:hover {
-    background-color: #3e8e41;
+    background-color: #3e8e41; /* Darker green on hover */
 }
 
+/* Hidden class for elements that should be invisible */
 .hidden {
     display: none;
 }
 
+/* Leaderboard styling */
 #leaderboard {
     margin: 20px auto;
-    color: #f0f0f0;
-    text-align:center;
+    color: #f0f0f0; /* Light color for contrast */
+    text-align: center; /* Center-align text */
 }
 
+/* Leaderboard list styling */
 #leaderboard-list {
-    list-style-type: none;
+    list-style-type: none; /* Remove list bullets */
     padding: 0;
 }
 
+/* Leaderboard list items styling */
 #leaderboard-list li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    padding: 10px; /* Padding for each item */
+    border-bottom: 1px solid #ddd; /* Border between items */
 }
 
 #leaderboard-list li:last-child {
-    border-bottom: none;
+    border-bottom: none; /* No border on the last item */
 }
 
+/* Restart quiz button styling */
 #restart-quiz {
     background-color: #4CAF50;
     color: #fff;
@@ -109,6 +123,34 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 20px; /* Add margin to push it to the bottom */
+    margin-top: 20px; /* Margin to push it to the bottom */
     align-self: center; /* Center the button horizontally */
+}
+
+/* Responsive adjustments for smaller devices */
+@media (max-width: 600px) {
+    #timer {
+        font-size: 60px; /* Smaller font size for smaller screens */
+    }
+    
+    #question-text {
+        font-size: 18px; /* Smaller font size for question text */
+    }
+    
+    #answer-input {
+        width: 90%; /* Wider input field */
+    }
+    
+    #submit-answer {
+        width: 70px; /* Smaller button width */
+    }
+    
+    #restart-quiz {
+        width: 70px; /* Smaller button width */
+        padding: 8px 15px; /* Smaller padding */
+    }
+    
+    #question-container {
+        min-height: 500px; /* Minimum height for smaller devices */
+    }
 }
