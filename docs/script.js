@@ -1,23 +1,11 @@
 $(document).ready(function() {
-    // Array of quiz questions
-    var questions = [
-        { question: "What is the capital of France?", correct: "Paris" },
-        { question: "What is the largest planet in our solar system?", correct: "Jupiter" },
-        { question: "Which artist painted the famous painting 'The Starry Night'?", correct: "Vincent van Gogh" },
-        { question: "What is the chemical symbol for gold?", correct: "Au" },
-        { question: "Which author wrote the famous novel 'To Kill a Mockingbird'?", correct: "Harper Lee" },
-        { question: "What is the largest mammal on Earth?", correct: "Blue whale" },
-        { question: "Which musician is known as the 'King of Rock and Roll'?", correct: "Elvis Presley" },
-        { question: "What is the capital of Australia?", correct: "Canberra" },
-        { question: "Which ancient civilization built the Great Pyramid of Giza?", correct: "Egyptians" },
-        { question: "What is the smallest country in the world, both in terms of population and land area?", correct: "Vatican City" },
-        { question: "Which actor played the role of Luke Skywalker in the original Star Wars trilogy?", correct: "Mark Hamill" },
-        { question: "What is the largest living structure on Earth?", correct: "The Great Barrier Reef" },
-        { question: "Which musician is known for his iconic guitar playing and hits like 'Purple Rain' and 'When Doves Cry'?", correct: "Prince" },
-        { question: "What is the highest mountain peak in North America?", correct: "Denali (formerly known as Mount McKinley)" },
-        { question: "Which author wrote the famous novel '1984'?", correct: "George Orwell" },
-        { question: "What was the name of the company Steve Jobs founded?", correct: "Apple" }
-    ];
+    var questions = [];
+
+    // Fetch questions from the JSON file
+    $.getJSON("questionnaire.json", function(data) {
+        questions = data;
+        startQuiz(); // Start the quiz once questions are loaded
+    });
 
     // Initialize quiz variables
     var currentQuestion = 0;
@@ -125,7 +113,4 @@ $(document).ready(function() {
             $("#submit-answer").trigger('click'); // Trigger the click event on the submit button
         }
     });
-
-    // Start the quiz when the document is ready
-    startQuiz();
 });
