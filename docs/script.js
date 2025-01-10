@@ -1,9 +1,21 @@
 $(document).ready(function() {
+    // Shuffle function
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
     var questions = [];
     var totalQuestions; // Total number of questions
 
     // Fetch questions from the JSON file
     $.getJSON("questionnaire.json", function(data) {
+        data.forEach(question => {
+            question.answers = shuffle(question.answers); // Shuffle answers
+        });
         questions = data;
         totalQuestions = questions.length; // Get total number of questions
         startQuiz(); // Start the quiz once questions are loaded
