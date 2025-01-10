@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var questions = [];
+    var questions = []; // Array to store quiz questions
 
     // Fetch questions from the JSON file
     $.getJSON("questionnaire.json", function(data) {
@@ -8,11 +8,11 @@ $(document).ready(function() {
     });
 
     // Initialize quiz variables
-    var currentQuestion = 0;
-    var score = 0;
-    var timeLeft = 30;
-    var timerInterval;
-    var leaderboard = [];
+    var currentQuestion = 0; // Index of the current question
+    var score = 0; // User's score
+    var timeLeft = 30; // Timer for each question
+    var timerInterval; // Reference to the timer interval
+    var leaderboard = []; // Array to store leaderboard entries
     var storedLeaderboard = JSON.parse(localStorage.getItem("leaderboard")) || []; // Retrieve leaderboard from local storage
 
     // Function to start the quiz
@@ -20,15 +20,18 @@ $(document).ready(function() {
         showQuestion(); // Display the first question
         startTimer(); // Start the quiz timer
         $("#restart-quiz").hide(); // Hide the restart button initially
-        $("#submit-answer").show(); // Ensure the submit button is visible
     }
 
     // Function to display the current question
     function showQuestion() {
-        var question = questions[currentQuestion];
-        $("#question-text").text("Question " + (currentQuestion + 1) + ": " + question.question);
-        $("#answer-input").val(""); // Clear the answer input field
-        $("#submit-answer").removeClass("hidden"); // Show the submit button
+        var question = questions[currentQuestion]; // Get the current question
+        $("#question-text").text("Question " + (currentQuestion + 1) + "/" + questions.length + ": " + question.question); // Update question text
+        var answerButtons = document.querySelectorAll('.answer-btn'); // Get all answer buttons
+        answerButtons.forEach((button, index) => {
+            button.innerText = question.answers[index].text; // Set the text of each answer button
+            button.dataset.correct = question.answers[index].correct; // Set the correct answer data attribute
+            button.classList.remove('correct', 'incorrect'); // Remove previous correct/incorrect classes
+        });
         $("#leaderboard").hide(); // Hide the leaderboard
         $("#timer").show(); // Show the timer
     }
@@ -46,30 +49,40 @@ $(document).ready(function() {
         }, 1000); // Update every second
     }
 
-    // Function to check the submitted answer
-    function checkAnswer(answer) {
-        var question = questions[currentQuestion];
-        if (answer !== null && answer.toLowerCase() === question.correct.toLowerCase()) {
-            score++; // Increment score if the answer is correct
-        }
+    // Function to handle answer selection
+    window.selectAnswer = function(button) {
+        const correct = button.dataset.correct === 'true'; // Check if the selected answer is correct
+        button.classList.add(correct ? 'correct' : 'incorrect'); // Highlight the selected answer
+
+        // Highlight all buttons
+        const answerButtons = document.querySelectorAll('.answer-btn');
+        answerButtons.forEach(btn => {
+            if (btn.dataset.correct === 'true') {
+                btn.classList.add('correct');
+            } else {
+                btn.classList.add('incorrect');
+            }
+        });
+
         clearInterval(timerInterval); // Stop the timer
-        timeLeft = 30; // Reset the timer
-        currentQuestion++; // Move to the next question
-        if (currentQuestion >= questions.length) {
-            showFinalScore(); // Display the final score
-            showLeaderboard(); // Display the leaderboard
-        } else {
-            showQuestion(); // Show the next question
-            startTimer(); // Restart the timer
-        }
-    }
+        setTimeout(() => {
+            timeLeft = 30; // Reset the timer
+            currentQuestion++; // Move to the next question
+            if (currentQuestion >= questions.length) {
+                showFinalScore(); // Display the final score
+                showLeaderboard(); // Display the leaderboard
+            } else {
+                showQuestion(); // Show the next question
+                startTimer(); // Restart the timer
+            }
+        }, 1000); // Delay before moving to the next question
+    };
 
     // Function to display the final score
     function showFinalScore() {
-        var finalScore = "Your final score is: " + score + " out of " + questions.length;
+        var finalScore = "Your final score is: " + score + " out of " + questions.length; // Prepare the final score message
         $("#question-text").text(finalScore); // Display the final score
         $("#timer").hide(); // Hide the timer
-        $("#submit-answer").hide(); // Hide the submit button
         $("#leaderboard").show(); // Show the leaderboard
         $("#restart-quiz").show(); // Show the restart button
     }
@@ -91,26 +104,11 @@ $(document).ready(function() {
         localStorage.setItem("leaderboard", JSON.stringify(top5)); // Store the top 5 in local storage
     }
 
-    // Event listener for the submit button
-    $("#submit-answer").click(function() {
-        var answer = $("#answer-input").val(); // Get the submitted answer
-        clearInterval(timerInterval); // Stop the timer
-        checkAnswer(answer); // Check the submitted answer
-    });
-
     // Event listener for the restart button
     $("#restart-quiz").click(function() {
         currentQuestion = 0; // Reset question index
         score = 0; // Reset score
         timeLeft = 30; // Reset timer
         startQuiz(); // Restart the quiz
-    });
-
-    // Event listener for the Enter key to submit the answer
-    $("#answer-input").on('keydown', function(event) {
-        if (event.keyCode === 13) { // Check if Enter key is pressed
-            event.preventDefault(); // Prevent the default action
-            $("#submit-answer").trigger('click'); // Trigger the click event on the submit button
-        }
     });
 });

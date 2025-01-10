@@ -24,8 +24,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%; /* Container width set to 80% of the parent */
-    max-width: 350px; /* Maximum width of the container */
+    width: calc(80% - 10px); /* Container width 10px smaller */
+    max-width: 340px; /* Maximum width of the container 10px smaller */
     min-height: 500px; /* Minimum height for the container */
     height: auto; /* Flexible height based on content */
     justify-content: space-between;
@@ -34,10 +34,10 @@ body {
 
 /* Timer styling */
 #timer {
-    font-size: 80px; /* Large font size for visibility */
+    font-size: 70px; /* Large font size for visibility */
     font-weight: bold;
     color: #f0f0f0; /* Light color for contrast */
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 /* Question text styling */
@@ -51,40 +51,36 @@ body {
     align-items: center;
 }
 
-/* Answer input styling */
-#answer-input {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    width: 80%; /* Width of the input field */
-    height: 30px;
-    border-radius: 5px;
-    border-style: none;
-}
-
-/* Submit answer button styling */
-#submit-answer {
-    width: 80px;
-    height: 25px;
-    margin-bottom: 20px;
-    background-color: #4CAF50; /* Green background color */
-    color: #fff; /* White text color */
-    border: none;
-    border-radius: 5px;
-}
-
 /* Answer button styling */
-.answer-button {
+.answer-btn {
+    width: calc(100% - 10px); /* Button width adjusted to fit */
+    margin: 5px 0;
+    padding: 10px 20px;
     background-color: #4CAF50;
     color: #fff;
-    padding: 10px 20px; /* Padding inside the button */
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
+.answer-btn.correct {
+    background-color: green;
+}
+
+.answer-btn.incorrect {
+    background-color: rgb(195, 255, 0);
+}
+
 /* Hover effect for answer button */
-.answer-button:hover {
+.answer-btn:hover {
     background-color: #3e8e41; /* Darker green on hover */
+}
+
+.btn-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Hidden class for elements that should be invisible */
