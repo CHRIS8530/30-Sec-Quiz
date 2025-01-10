@@ -34,10 +34,11 @@ body {
 
 /* Timer styling */
 #timer {
-    font-size: 70px; /* Large font size for visibility */
+    font-size: 80px; /* Large font size for visibility */
     font-weight: bold;
     color: #f0f0f0; /* Light color for contrast */
-    margin-top: 10px;
+    position: relative;
+    top: -10px; /* Move the timer 10px up */
 }
 
 /* Question text styling */
@@ -68,7 +69,7 @@ body {
 }
 
 .answer-btn.incorrect {
-    background-color: rgb(195, 255, 0);
+    background-color: #32CD32; /* Lime green for incorrect answers */
 }
 
 /* Hover effect for answer button */
@@ -83,9 +84,16 @@ body {
     align-items: center;
 }
 
+/* Score display styling */
+#score {
+    font-size: 18px; /* Font size for visibility */
+    color: #333; /* Text color for contrast */
+    margin-top: 10px; /* Margin to separate from other elements */
+}
+
 /* Hidden class for elements that should be invisible */
 .hidden {
-    display: none;
+    display: none !important; /* Ensure the element is hidden */
 }
 
 /* Leaderboard styling */
